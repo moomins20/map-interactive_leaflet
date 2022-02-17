@@ -9,6 +9,7 @@ body {
     height: 600px; 
     width: 80vw;
     margin: 0 auto;
+    color: #000;
 }
 
 header, main {
@@ -16,5 +17,24 @@ header, main {
 }
 
 .legende {
-    width: 200px;
+    display: flex;
+    justify-content: space-around;
+}
+
+li {
+    list-style-type: none;
+}
+
+li p {
+    display: inline;
+}
+
+footer {
+    text-align: center;
+    margin: 50px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
 }

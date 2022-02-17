@@ -123,19 +123,27 @@ let echelle = L.control
     .addTo(maCarte);
 
 // *** BARRE DE RECHERCHE ***
+const couchePoints = L.layerGroup();
+        couchePoints.addTo(maCarte);
 
 const searchControl = L.esri.Geocoding.geosearch({
 	position: 'topright',
-	placeholder: 'Rechercher...',
+	placeholder: 'Entrer une adresse',
 	useMapBounds: false,
-	providers: [
-		L.esri.Geocoding.arcgisOnlineProvider({
+	providers: [L.esri.Geocoding.arcgisOnlineProvider({
 			apikey: apikey,
 			nearby: {
-				lat: 46,
-				lng: -71,
+				lat: 45.6,
+				lng: -73,
 			},
-		}),
-	],
+	})]
 }).addTo(maCarte);
 
+searchControl.on("results", (data) => {
+    for(let i=0; i<data.results.length; i++){
+        couchePoints.clearLayers();
+        let marqueur = L.marker(data.results[i].latlng);
+        marqueur.bindPopup(data.results[i].text).openPopup();
+        marqueur.addTo(couchePoints);  
+    }
+});
