@@ -1,4 +1,5 @@
 const maCarte = L.map('map', {attributionControl: false}).setView([45.6, -73.6], 10);
+const requete = document.getElementById('requete');
 
 // *** ICONES ***
 
@@ -63,7 +64,8 @@ L.esri.featureLayer({
       return L.marker(latlng, {
         icon: microIcone
       });
-    }
+    },
+    fileds: ['Région_Administrative', 'Ville'],
 }).bindPopup(function (layer) {
     return `<h3>${layer.feature.properties.Nom__raison_sociale_}</h3> 
             
@@ -72,20 +74,9 @@ L.esri.featureLayer({
    
 }).addTo(maCarte);
 
-// *** CONTROLE DE COUCHES ***
+// REQUETE
 
-let baseLayers = {
-    'Crayons de couleur': fondCouleur,
-    'Gris': fondGris,
-    'Navigation': fondNavigation
-}
-
-let overlays = {
-    'Dépanneurs': depanneurs,
-    'Microbrasserie': micro
-}
-
-L.control.layers(baseLayers, overlays).addTo(maCarte);
+requete.addEventListener('change', ()=> micro.setWhere(requete.value));
 
 // **GÉOLOCALISATION**
 
@@ -110,6 +101,8 @@ function affichePosition(position) {
     L.marker([lat, long], {icon: personneIcone}).addTo(maCarte)
     .bindPopup('Vous êtes ici!')
     .openPopup();
+
+    maCarte.flyTo(L.latLng(lat, long), 13);
 }
 
 function afficheErreur(erreur) {
@@ -119,7 +112,7 @@ function afficheErreur(erreur) {
 // *** BARRE D'ÉCHECHELLE ***
 
 let echelle = L.control
-    .scale({'imperial': false})
+    .scale({'imperial': false, 'maxWidth': 200})
     .addTo(maCarte);
 
 // *** BARRE DE RECHERCHE ***
@@ -147,3 +140,63 @@ searchControl.on("results", (data) => {
         marqueur.addTo(couchePoints);  
     }
 });
+
+// *** API METEO ***
+
+const urlMeteo = "http://api.openweathermap.org/data/2.5/weather?q=Montreal&units=metric&lang=fr&appid=ac071235dd9fb3185b269f049005b9e9";
+
+const groupe = L.layerGroup();
+
+let xhttp = new XMLHttpRequest();
+//Callback au changement d'état
+xhttp.onreadystatechange = function () {
+    if (xhttp.readyState == 4 && this.status == 200) {
+        let fichierJSON = JSON.parse(xhttp.responseText);
+        afficheMeteo({
+            temperature: fichierJSON.main.temp,
+            description: fichierJSON.weather[0].description,
+            urlIcon: `http://openweathermap.org/img/w/${fichierJSON.weather[0].icon}.png`, 
+            coordonees:fichierJSON.coord
+        })
+    };
+}
+xhttp.open("GET", urlMeteo);
+xhttp.send();
+
+function afficheMeteo(objMeteo){
+    let centre = L.latLng(objMeteo.coordonees.lat, objMeteo.coordonees.lon);
+    let label = L.marker(centre,{
+        zIndexOffset: 1000,
+        minZoom: 8,
+        icon: L.divIcon({
+        className: 'label',
+        html: '<div><img src="' + objMeteo.urlIcon + '" title="' + objMeteo.description + '"><p>' + objMeteo.temperature + ' C&deg;</p></div>'})
+            
+    }).addTo(groupe)
+    .bindTooltip(objMeteo.description, {offset: [10, 45]});
+}
+
+maCarte.on("zoomend", ()=>{
+    if (maCarte.getZoom()>13){
+        maCarte.addLayer(groupe);
+    }else{
+        maCarte.removeLayer(groupe);
+    }
+    console.log(maCarte.hasLayer(groupe));
+});
+
+// *** CONTROLE DE COUCHES ***
+
+let baseLayers = {
+    'Crayons de couleur': fondCouleur,
+    'Gris': fondGris,
+    'Navigation': fondNavigation
+}
+
+let overlays = {
+    'Dépanneurs': depanneurs,
+    'Microbrasserie': micro,
+    'Météo': groupe
+}
+
+L.control.layers(baseLayers, overlays).addTo(maCarte);
