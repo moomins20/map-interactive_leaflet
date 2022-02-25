@@ -44,6 +44,31 @@
         <p id="affichePosition"></p>
         <p id="afficheCoords"></p>
         <button id="activerGeolocalisation">Trouve moi!</button>
+
+        <!-- QUERY -->
+        <div id="query" class="leaflet-bar">
+            <label>
+                <select id="requete">
+                    <option value="1=1">Régions</option>
+                    <option value="Région_Administrative=1">Bas-Saint-Laurent</option>
+                    <option value="Région_Administrative=2">Saguenay–Lac-Saint-Jean</option>
+                    <option value="Région_Administrative=3">Capitale-Nationale</option>
+                    <option value="Région_Administrative=4">Mauricie</option>
+                    <option value="Région_Administrative=5">Estrie</option>
+                    <option value="Région_Administrative=6">Montréal</option>
+                    <option value="Région_Administrative=7">Outaouais</option>
+                    <option value="Région_Administrative=8">Abitibi-Témiscamingue</option>
+                    <option value="Région_Administrative=9">Côte-Nord</option>
+                    <option value="Région_Administrative=11">Gaspésie–Îles-de-la-Madeleine</option>
+                    <option value="Région_Administrative=12">Chaudière-Appalaches</option>
+                    <option value="Région_Administrative=13">Laval</option>
+                    <option value="Région_Administrative=14">Lanaudière</option>
+                    <option value="Région_Administrative=15">Laurentides</option>
+                    <option value="Région_Administrative=16">Montérégie</option>
+                    <option value="Région_Administrative=17">Centre-du-Québec</option>
+                </select>
+            </label>
+        </div>
         <!-- MA CARTE -->
         <div id="map"></div>
     
@@ -53,7 +78,7 @@
         <ul class="legende">
             <li>
                 <img src="./assets/img/canette.png" alt="Icone de canette">
-                <p>Les dépanneurs</p>
+                <p>Les dépanneurs</p> 
             </li>
     
             <li>
@@ -75,6 +100,7 @@
 
     
     <script src="assets/scripts/depanneur.js"></script>
+    <script src="assets/scripts/cleapi.js"></script>
     <script src="assets/scripts/main.js"></script>
 </body>
 </html>
