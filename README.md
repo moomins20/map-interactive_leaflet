@@ -4,32 +4,32 @@ Protoype d'une carte interactive sur la thématique des bières de microbrasseri
 
 #### Énoncé du travail
 
-• Votre application doit pouvoir fonctionner (sans bogues);
-• Elle devra avoir minimalement les éléments suivants :
-    o Une bande de titre;
-    o Une échelle;
-    o Une barre de recherche par adresse ou point d’intérêt;
-    o Une icône pour changer le fond de carte;
-    o 2 couches (une locale et l’autre en service) d’informations (au moins une couche avec
+1. Votre application doit pouvoir fonctionner (sans bogues);
+2. Elle devra avoir minimalement les éléments suivants :
+    * Une bande de titre;
+    * Une échelle;
+    * Une barre de recherche par adresse ou point d’intérêt;
+    * Une icône pour changer le fond de carte;
+    * 2 couches (une locale et l’autre en service) d’informations (au moins une couche avec
       popup ou tooltip);
-    o Un point de géolocalisation de l’usager;
-    o Une légende comprenant les différentes couches de la carte (la légende peut-être
+    * Un point de géolocalisation de l’usager;
+    * Une légende comprenant les différentes couches de la carte (la légende peut-être
       dynamique soit par programmation ou statique, c’est-à-dire une image superposée à la
       carte);
-    o Votre nom;
-    o Une couche pour la météo (icône et texte météo)1.
-    o Une requête pour que l’usage puisse filtrer vos données (voir les vidéos sur les requêtes
+    * Votre nom;
+    * Une couche pour la météo (icône et texte météo)1.
+    * Une requête pour que l’usage puisse filtrer vos données (voir les vidéos sur les requêtes
       tabulaires et spatiales).
-    o Elle devra être réactive2 (vous pouvez utiliser Bootstrap);
-    o Avoir au moins un objet JavaScript (littéral ou via une classe)
+    * Elle devra être réactive2 (vous pouvez utiliser Bootstrap);
+    * Avoir au moins un objet JavaScript (littéral ou via une classe)
 
 #### Outils
 
-  -HTML
-  -CSS
-  -JavaScript
-  -Esri
-  -Leaflet
+  - HTML
+  - CSS
+  - JavaScript
+  - Esri
+  - Leaflet
   
  #### Sujet
  
