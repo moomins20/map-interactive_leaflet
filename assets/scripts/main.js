@@ -17,15 +17,12 @@ const microIcone = L.icon({
     popupAnchor: [15, -5]
 });
 
-
 const personneIcone = L.icon({
     iconUrl: 'assets/img/person.png',
     iconSize: [35, 35],
     iconAnchor: [0, 0],
     popupAnchor: [15, -5]
 });
-
-const apikey = 'AAPK2a71336bee2b4dab8c8dbc79b208b359QrvXlwSkwJ3F7cG-Zw2D_f0TwFK0M-GoBa8Bvk55N3cmMkSAIhbJQRzzhovtdfM_';
 
 // *** FOND DE COUCHES ***
 
